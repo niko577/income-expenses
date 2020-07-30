@@ -7,10 +7,12 @@ export const GlobalContext = createContext<any>(null)
 const GlobalCtx: FC = ({ children }) => {
     const [authorization, setAuthorization] = useState(false)
     const [token, setToken] = useState('')
+    const [loader, setLoader] = useState(false)
 
     const DISPATCH = async (type?: string, endpoint?: string, data?: any) => {
         switch (type) {
         case 'get': {
+            setLoader(true)
             let result; let response;
             try {
                 response = await axios.get(`${env}${endpoint}`, { 
@@ -21,10 +23,12 @@ const GlobalCtx: FC = ({ children }) => {
                 console.log(error);
                 result = null
             }
+            setLoader(false)
             return result
         }
 
         case 'post': {
+            setLoader(true)
             let result; let response;
             try {
                 response = await axios.post(`${env}${endpoint}`, data, { 
@@ -35,10 +39,12 @@ const GlobalCtx: FC = ({ children }) => {
                 console.log(error);
                 result = null
             }
+            setLoader(false)
             return result
         }
 
         case 'put': {
+            setLoader(true)
             let result; let response;
             try {
                 response = await axios.put(`${env}${endpoint}`, data, { 
@@ -49,10 +55,12 @@ const GlobalCtx: FC = ({ children }) => {
                 console.log(error);
                 result = null
             }
+            setLoader(false)
             return result
         }
 
         case 'delete': {
+            setLoader(true)
             let result; let response;
             try {
                 response = await axios.delete(`${env}${endpoint}`, { 
@@ -63,6 +71,7 @@ const GlobalCtx: FC = ({ children }) => {
                 console.log(error);
                 result = null
             }
+            setLoader(false)
             return result
         }
         
@@ -77,6 +86,8 @@ const GlobalCtx: FC = ({ children }) => {
         axios,
         authorization,
         setAuthorization,
+        loader,
+        setLoader,
     }
 
     return (
