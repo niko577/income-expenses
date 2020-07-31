@@ -1,4 +1,4 @@
-import React, { createContext, FC,useState } from 'react'
+import React, { createContext, FC,useState, useEffect } from 'react'
 import axios from 'axios'
 import env from '../env'
 
@@ -8,6 +8,27 @@ const GlobalCtx: FC = ({ children }) => {
     const [authorization, setAuthorization] = useState(false)
     const [token, setToken] = useState('')
     const [loader, setLoader] = useState(false)
+
+    useEffect(() => {
+        checkToken()
+    }, [])
+    useEffect(() => {
+    }, [authorization])
+
+    const checkToken = (): void => {
+        const tokenFromStorage: string | null = localStorage.getItem('token')
+
+        if (tokenFromStorage) {
+            setToken(tokenFromStorage)
+        } else {
+            setToken('empty')
+        }
+    }
+
+    const setNewToken = (newToken: string): void => {
+        localStorage.setItem('token', newToken)
+        checkToken()
+    }
 
     const DISPATCH = async (type?: string, endpoint?: string, data?: any) => {
         switch (type) {
@@ -88,6 +109,7 @@ const GlobalCtx: FC = ({ children }) => {
         setAuthorization,
         loader,
         setLoader,
+        setNewToken,
     }
 
     return (
