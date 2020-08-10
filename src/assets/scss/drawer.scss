@@ -1,0 +1,58 @@
+.drawer {
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .toolbar-dtx {
+    min-height: 56px;
+    @media (min-width: 960px) {
+      min-height: 64px;
+    }
+  }
+  .current-user {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    .MuiAvatar-root {
+      background-color: #464855;
+    }
+    .user-name {
+      font-size: 14px;
+      margin-left: 10px;
+      width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      @media (min-width: 960px) {
+        width: 190px;
+      }
+    }
+  }
+  .close-drawer {
+    @media (min-width: 960px) {
+      display: none;
+    }
+  }
+  .logout-btn {
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiList-root {
+    margin: 15px 0 10px 0;
+    .MuiListItemIcon-root {
+      min-width: 45px;
+    }
+  }
+  .MuiList-root > a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.87);
+    &.active {
+      color: #f50057;
+      .MuiListItemIcon-root {
+        color: #f50057;
+      }
+    }
+  }
+}

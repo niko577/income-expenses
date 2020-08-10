@@ -1,0 +1,45 @@
+.view-login-container {
+  display: flex;
+  justify-content: center;
+  @media (min-width: 900px) {
+    margin-top: 150px;
+  }
+  .inner-box {
+    max-width: 500px;
+
+    border-radius: 4px;
+    padding: 25px;
+    @media (min-width: 900px) {
+      background-color: #fff;
+      box-shadow: 0 2px 18px 1px rgba(49, 53, 72, 0.12);
+    }
+    .acc-ask {
+      text-align: right;
+    }
+    .alert {
+      margin: 15px 0;
+    }
+    .btn-submit {
+      margin: 15px 0;
+      padding: 7px;
+      background-color: $primary-color;
+      &:hover {
+        background-color: #3f51b5;
+      }
+    }
+    .heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > div {
+        background-color: $primary-color;
+      }
+      h1 {
+        padding-top: 5px;
+      }
+    }
+    .agreement .MuiFormControlLabel-label {
+      font-size: 13px;
+    }
+  }
+}
