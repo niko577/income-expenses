@@ -1,0 +1,93 @@
+.module-accounts {
+    max-width: 1300px;
+    margin: 0 auto;
+    @media (min-width: 600px) {
+        margin: 10px auto;
+    }
+    @media (min-width: 960px) {
+        margin: 5px auto;
+    }
+    .account-list {
+    table {
+      tr {
+        &.archived td {
+          color: #d2d2d2;
+        }
+        .actions-cell {
+          width: 120px;
+          .actions {
+            margin: -10px 0;
+            display: flex;
+            button &:nth-child(2) {
+              margin-left: -5px;
+            }
+          }
+        }
+        .balance-cell {
+          width: 150px;
+          white-space: nowrap;
+        }
+        .default-cell {
+          width: 120px;
+        }
+        .name-cell {
+          word-break: break-all;
+          min-width: 180px;
+        }
+        .desc-cell {
+          word-break: break-all;
+          min-width: 260px;
+        }
+        .archive-cell {
+          width: 100px;
+        }
+        .icon-cell {
+          width: 40px;
+          padding-right: 0;
+          span {
+            padding-top: 2px;
+          }
+        }
+      }
+    }
+  }
+  .dialog-account {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+.module-accounts-modal .MuiDialog-paper {
+  width: 100%;
+  .MuiDialogContent-root {
+    margin-top: -20px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    .agreement {
+      margin-bottom: 20px;
+    }
+    .btn-submit {
+      width: 200px;
+      margin: 0 auto;
+      @media (min-width: 400px) {
+        width: 250px;
+      }
+    }
+    .choose-icon {
+      padding-top: 10px;
+      > span {
+        display: block;
+        font-size: 13px;
+      }
+      .icon {
+        display: inline-block;
+        button.Mui-disabled {
+          color: #f50057;
+        }
+      }
+    }
+  }
+}

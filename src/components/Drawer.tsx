@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { GlobalContext } from '../context/GlobalContext'
 
 const MiniDrawer: FC<any> = ({ forwardRef }) => {
-    const { DISPATCH, setAuthorization } = useContext(GlobalContext)
+    const { DISPATCH, setAuthorization, setCsvModal } = useContext(GlobalContext)
 
     const [mobileOpen, setMobileOpen] = useState(false)
     const [userData, setUserData] = useState({ email: '' })
@@ -77,6 +77,15 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
                         </ListItem>
                     </NavLink>
                 ))}
+            </List>
+            <Divider />
+            <List>
+                <ListItem button onClick={() => setCsvModal(true)}>
+                    <ListItemIcon>
+                        <Icon>get_app</Icon>
+                    </ListItemIcon>
+                    <ListItemText primary="Wygeneruj CSV" />
+                </ListItem>
             </List>
             <Divider />
             <Button type="button" onClick={handleLogout} className="logout-btn">Wyloguj</Button>

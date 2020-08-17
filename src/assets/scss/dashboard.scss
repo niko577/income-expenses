@@ -1,0 +1,39 @@
+.module-dashboard {
+    max-width: 1300px;
+    margin: 0 auto;
+    @media (min-width: 600px) {
+        margin: 10px auto;
+    }
+    @media (min-width: 960px) {
+        margin: -10px auto;
+    }
+    .items-wrapper {
+        display: flex;
+        flex-direction: column;
+        @media(min-width: 1200px) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: -10px -10px;
+        }
+         .dash-element {
+            padding: 0 0 15px;
+            @media(min-width: 1200px) {
+                width: 50%;
+                padding: 10px;
+            }
+            .MuiPaper-root {
+                padding: 15px;
+            }
+        }
+        .single-chart {
+            h2 {
+                font-size: 18px;
+                margin-bottom: 20px;
+                opacity: .87;
+            }
+            canvas {
+                max-height: 300px !important;
+            }
+        }
+    }
+}

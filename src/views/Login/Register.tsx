@@ -4,7 +4,7 @@ import { Alert } from '@material-ui/lab'
 import { GlobalContext } from '../../context/GlobalContext'
 
 const RegisterWidget: React.FC = () => {
-    const { axios, env } = useContext(GlobalContext)
+    const { axios, env, setLoader, setNewToken, setAuthorization } = useContext(GlobalContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,6 +12,7 @@ const RegisterWidget: React.FC = () => {
 
     const handleSignUp = (event: any) => {
         event.preventDefault()
+        setLoader(true)
 
         axios
             .post(`${env}/auth/sign-up`, {
@@ -19,12 +20,15 @@ const RegisterWidget: React.FC = () => {
                 password,
             })
             .then((response: any) => {
+                setNewToken(response?.data?.accessToken)
                 setErrorMessage([])
+                setAuthorization(true)
             })
             .catch((error: any) => {
                 setErrorMessage(error?.response?.data?.message)
             })
             .then(() => {
+                setLoader(false)
             })
     }
 
@@ -75,7 +79,8 @@ const RegisterWidget: React.FC = () => {
                             fullWidth
                             variant="contained"
                             color="primary"
-                        >Zarejestruj się</Button>
+                        >Zarejestruj się
+                        </Button>
                     </form>
                 </div>
             </div>

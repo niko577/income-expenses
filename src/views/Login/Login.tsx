@@ -4,7 +4,7 @@ import { Alert } from '@material-ui/lab'
 import { GlobalContext } from '../../context/GlobalContext'
 
 const LoginWidget: React.FC = () => {
-    const { axios, env } = useContext(GlobalContext)
+    const { axios, env, setLoader, setNewToken, setAuthorization } = useContext(GlobalContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,18 +13,22 @@ const LoginWidget: React.FC = () => {
     const handleSignIn = (event: FormEvent) => {
         event.preventDefault()
 
+        setLoader(true)
         axios
             .post(`${env}/auth/sign-in`, {
                 email,
                 password,
             })
             .then((response: any) => {
+                setNewToken(response?.data?.accessToken)
                 setErrorMessage([])
+                setAuthorization(true)
             })
             .catch((error: any) => {
                 setErrorMessage(error?.response?.data?.message)
             })
             .then(() => {
+                setLoader(false)
             })
     }
 
@@ -70,7 +74,8 @@ const LoginWidget: React.FC = () => {
                             fullWidth
                             variant="contained"
                             color="primary"
-                        >Zaloguj się</Button>
+                        >Zaloguj się
+                        </Button>
                     </form>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC, useRef } from 'react'
 import List from './List'
 import Dialog from './Dialog'
 import { Account } from '../../interfaces'
@@ -13,10 +13,6 @@ const Accounts: FC<any> = () => {
     const deleteAccount = (account: Account) => {
         dialogRef.current.deleteAccount(account)
     }
-
-    useEffect(() => {
-        document.title = 'Money Manager - Konta'
-    }, [])
 
     return (
         <div className="module-accounts">

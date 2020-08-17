@@ -4,11 +4,18 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import ProtectedRoute from './ProtectedRoute'
 
 import Container from './components/Container'
+import Accounts from './views/Accounts/Index'
+import Categories from './views/Categories/Index'
+import CategoriesDetails from './views/Categories/Details'
+import Transactions from './views/Transactions/Index'
+import Dashboard from './views/Dashboard/Index'
 import Login from './views/Login/Index'
 
 import { GlobalContext } from './context/GlobalContext'
 
 import LoaderElement from './components/LoaderElement'
+import SnackbarElement from './components/SnackbarElement'
+import GetCSV from './components/GetCSV'
 
 const App: React.FC = () => {
     const { DISPATCH, setLoader, token, setAuthorization, authorization } = useContext(GlobalContext)
@@ -36,6 +43,8 @@ const App: React.FC = () => {
     return (
         <>
             <LoaderElement />
+            <SnackbarElement />
+            <GetCSV />
             {!checking && (
                 <div>
                     <Router>
@@ -47,22 +56,27 @@ const App: React.FC = () => {
                             )}
                             <ProtectedRoute exact path="/dashboard">
                                 <Container name="Strona główna">
+                                    <Dashboard />
                                 </Container>
                             </ProtectedRoute>
                             <ProtectedRoute exact path="/accounts">
                                 <Container name="Konta">
+                                    <Accounts />
                                 </Container>
                             </ProtectedRoute>
                             <ProtectedRoute exact path="/categories">
                                 <Container name="Kategorie">
+                                    <Categories />
                                 </Container>
                             </ProtectedRoute>
                             <ProtectedRoute exact path="/categories/:id">
                                 <Container name="Szczegóły kategorii">
+                                    <CategoriesDetails />
                                 </Container>
                             </ProtectedRoute>
                             <ProtectedRoute exact path="/transactions">
                                 <Container name="Transakcje">
+                                    <Transactions />
                                 </Container>
                             </ProtectedRoute>
 

@@ -1,13 +1,17 @@
-import React, { createContext, FC,useState, useEffect } from 'react'
+import React, { createContext, useState, FC, useEffect } from 'react'
 import axios from 'axios'
+import { colors, categoryIconList, accountIconList, convertMonths } from '../helpers'
 import env from '../env'
 
 export const GlobalContext = createContext<any>(null)
 
 const GlobalCtx: FC = ({ children }) => {
-    const [authorization, setAuthorization] = useState(false)
-    const [token, setToken] = useState('')
     const [loader, setLoader] = useState(false)
+    const [snackbarVisibility, setSnackbarVisibility] = useState(false)
+    const [snackbarMessage, setSnackbarMessage] = useState('')
+    const [token, setToken] = useState('')
+    const [authorization, setAuthorization] = useState(false)
+    const [csvModal, setCsvModal] = useState(false)
 
     useEffect(() => {
         checkToken()
@@ -28,6 +32,11 @@ const GlobalCtx: FC = ({ children }) => {
     const setNewToken = (newToken: string): void => {
         localStorage.setItem('token', newToken)
         checkToken()
+    }
+
+    const showSnackbar = (text: string) => {
+        setSnackbarMessage(text)
+        setSnackbarVisibility(true)
     }
 
     const DISPATCH = async (type?: string, endpoint?: string, data?: any) => {
@@ -100,16 +109,27 @@ const GlobalCtx: FC = ({ children }) => {
             break;
         }
     }
-    
+
     const vProvider = {
         DISPATCH,
         env,
         axios,
-        authorization,
-        setAuthorization,
+        colors,
+        categoryIconList,
+        accountIconList,
         loader,
         setLoader,
+        snackbarVisibility,
+        setSnackbarVisibility,
+        showSnackbar,
+        snackbarMessage,
+        token,
+        convertMonths,
+        authorization,
         setNewToken,
+        setAuthorization,
+        csvModal,
+        setCsvModal,
     }
 
     return (

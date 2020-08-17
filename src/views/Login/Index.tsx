@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import LoginWidget from './Login'
 import RegisterWidget from './Register'
 
 const LoginIndex: React.FC = () => {
     const [widgetType, setWidgetType] = useState('LoginWidget')
-
-    useEffect(() => {
-        document.title = 'Money Manager - Logowanie'
-    }, [])
 
     return (
         <div className="view-login-container">

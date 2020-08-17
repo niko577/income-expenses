@@ -1,3 +1,1 @@
-const api = 'https://income-expenses.herokuapp.com/'
-
-export default api
+export default 'https://api.dev-money.appjs.tk/v0'

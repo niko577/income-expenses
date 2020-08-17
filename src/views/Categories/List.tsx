@@ -7,12 +7,12 @@ import { GlobalContext } from '../../context/GlobalContext'
 import { Category } from '../../interfaces'
 
 const CategoriesList: FC<any> = ({ forwardRef }) => {
-    const { DISPATCH, prettyPrice } = useContext(GlobalContext)
+    const { DISPATCH } = useContext(GlobalContext)
 
     const [currentTab, setCurrentTab] = useState(1)
     const [categoriesList, setCategoriesList] = useState([])
     const [filtredCategoriesList, setFiltredCategoriesList] = useState([])
-    const [getting, setGetting] = useState(true)
+    const [downloaded, setDownloaded] = useState(false)
 
     const handleChangeTab = (event: ChangeEvent<{}>, newValue: number) => {
         setCurrentTab(newValue)
@@ -48,8 +48,8 @@ const CategoriesList: FC<any> = ({ forwardRef }) => {
         
         if (response !== null) { 
             setCategoriesList(response)
+            setDownloaded(true) 
         }
-        setGetting(false) 
     }
 
     useEffect(() => {
@@ -62,64 +62,60 @@ const CategoriesList: FC<any> = ({ forwardRef }) => {
   }, [categoriesList])
 
     return (
-        <>
-            {!getting &&
-                <div className="list-wrapper">
-                    <Paper square>
-                        <Tabs
-                            value={currentTab}
-                            onChange={handleChangeTab}
-                            variant="fullWidth"
-                            indicatorColor="secondary"
-                            textColor="secondary"
-                            aria-label="icon label tabs example"
-                        >
-                            <Tab icon={<TrendingDown />} label="Wydatki" />
-                            <Tab icon={<ViewModule />} label="Wszystkie" />
-                            <Tab icon={<TrendingUp />} label="Przychody" />
-                        </Tabs>
-                    </Paper>
-                    {filtredCategoriesList?.length ? (
-                        <div className="list">
-                            {filtredCategoriesList.map((item: any) => {
-                                return (
-                                    <div className="item" key={item.id}>
-                                        <Link to={`/categories/${item.id}`}>
-                                            <CardActionArea>
-                                                <Paper square>
+        <div className="list-wrapper">
+            <Paper square>
+                <Tabs
+                    value={currentTab}
+                    onChange={handleChangeTab}
+                    variant="fullWidth"
+                    indicatorColor="secondary"
+                    textColor="secondary"
+                    aria-label="icon label tabs example"
+                >
+                    <Tab icon={<TrendingDown />} label="Wydatki" />
+                    <Tab icon={<ViewModule />} label="Wszystkie" />
+                    <Tab icon={<TrendingUp />} label="Przychody" />
+                </Tabs>
+            </Paper>
+            {filtredCategoriesList?.length ? (
+                <div className="list">
+                    {filtredCategoriesList.map((item: any) => {
+                        return (
+                            <div className="item" key={item.id}>
+                                <Link to={`/categories/${item.id}`}>
+                                    <CardActionArea>
+                                        <Paper square>
+                                            <div
+                                                className={
+                                                    item.archived ? 'archived inner-item' : 'inner-item'
+                                                }
+                                            >
+                                                <div className="icon-wrapper">
                                                     <div
-                                                        className={
-                                                            item.archived ? 'archived inner-item' : 'inner-item'
-                                                        }
+                                                        className="icon"
+                                                        style={{
+                                                            backgroundColor: item.color || '#2196f3',
+                                                        }}
                                                     >
-                                                        <div className="icon-wrapper">
-                                                            <div
-                                                                className="icon"
-                                                                style={{
-                                                                    backgroundColor: item.color || '#2196f3',
-                                                                }}
-                                                            >
-                                                                <Icon>{item.iconName}</Icon>
-                                                            </div>
-                                                        </div>
-                                                        <div className="name">{item.name}</div>
-                                                        <div className="amount" style={{ color: item.color }}>
-                                                            {prettyPrice(item.amountForCurrentMonth)} zł
-                                                        </div>
+                                                        <Icon>{item.iconName}</Icon>
                                                     </div>
-                                                </Paper>
-                                            </CardActionArea>
-                                        </Link>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    ) : 
-                        <Paper className="alert-msg"><Alert severity="info" variant="outlined"><span>Lista kategorii jest pusta</span></Alert></Paper>
-                    }
+                                                </div>
+                                                <div className="name">{item.name}</div>
+                                                <div className="amount">
+                                                    {item.amountForCurrentMonth} zł
+                                                </div>
+                                            </div>
+                                        </Paper>
+                                    </CardActionArea>
+                                </Link>
+                            </div>
+                        )
+                    })}
                 </div>
+            ) : 
+                downloaded && <Paper className="alert-msg"><Alert severity="warning" variant="outlined"><span>Lista kategorii jest pusta</span></Alert></Paper>
             }
-        </>
+        </div>
     )
 }
 
