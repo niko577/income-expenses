@@ -1,6 +1,6 @@
 import React, { createContext, useState, FC, useEffect } from 'react'
 import axios from 'axios'
-import { colors, categoryIconList, accountIconList, convertMonths } from '../helpers'
+import { colors, categoryIconList, accountIconList, convertMonths, prettyPrice } from '../helpers'
 import env from '../env'
 
 export const GlobalContext = createContext<any>(null)
@@ -126,6 +126,7 @@ const GlobalCtx: FC = ({ children }) => {
         token,
         convertMonths,
         authorization,
+        prettyPrice,
         setNewToken,
         setAuthorization,
         csvModal,

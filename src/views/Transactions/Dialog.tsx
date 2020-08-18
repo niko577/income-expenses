@@ -3,6 +3,7 @@ import { TextField, Button, Fab, Icon, Dialog, DialogContent, DialogActions, Dia
 import Alert from '@material-ui/lab/Alert';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns';
+import plLocale from 'date-fns/locale/pl';
 import { GlobalContext } from '../../context/GlobalContext'
 import { Account, Category, Transaction } from '../../interfaces'
 
@@ -82,14 +83,17 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
     const clearForm = () => {
         setComment('')
         if (transactions?.accounts[0]) {
-            setSelectedAccount(transactions.accounts[0].id)
+            const defaultAccount = transactions.accounts.find((account: Account) => account.default)
+            setSelectedAccount(defaultAccount.id)
         }
         if (transactions?.categories[0]) {
             setSelectedCategory(transactions.categories[0].id)
         }
         if (transactions?.accounts[0] && transactions?.accounts[1]) {
-            setFromAccount(transactions.accounts[0].id)
-            setToAccount(transactions.accounts[1].id)
+            const defaultAccount = transactions.accounts.find((account: Account) => account.default)
+            setFromAccount(defaultAccount.id)
+            const otherAccounts = transactions.accounts.filter((account: Account) => !account.default)
+            setToAccount(otherAccounts[0].id)
         }
         setAmount('')
         getCurrentDate(new Date())
@@ -101,7 +105,8 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
         if (response !== null) { 
             setTransactions(response) 
             if (response?.accounts[0]) {
-                setSelectedAccount(response.accounts[0].id)
+                const defaultAccount = response.accounts.find((account: Account) => account.default)
+                setSelectedAccount(defaultAccount.id)
             }
             if (response?.categories[0]) {
                 setSelectedCategory(response.categories[0].id)
@@ -185,6 +190,8 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
         setDialogStatus(true)
         setEditModalType(true)
 
+        console.log(transaction);
+
         setEditedId(transaction.id)
         setType(transaction.type === 'EXTERNAL_TRANSACTION' ? 0 : 1)
         setComment(transaction.comment ? transaction.comment : '')
@@ -195,6 +202,9 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
         setFromAccount(transaction.sourceAccountId)
         setToAccount(transaction.destinationAccountId)
     }
+
+    const accountsList = () => transactions.accounts
+    const categoriesList = () => transactions.categories
 
     useImperativeHandle(forwardRef, () => {
         return {
@@ -263,12 +273,15 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                             />
                                         </div>
                                         <div className="line-element">
-                                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={plLocale}>
                                                 <KeyboardDatePicker
                                                     margin="normal"
                                                     inputVariant="outlined"
                                                     label="Wybierz datę"
                                                     format="yyyy-MM-dd"
+                                                    okLabel="Ok"
+                                                    clearLabel="Wyczyść"
+                                                    cancelLabel="Anuluj"
                                                     value={selectedDate}
                                                     onChange={handleDateChange}
                                                 />
@@ -277,7 +290,7 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                     </div>
                                     {type === 0 ?
                                         <div className="one-line">
-                                            {transactions.accounts && selectedAccount > 0 &&
+                                            {accountsList() && selectedAccount > 0 &&
                                                 <div className="line-element">
                                                     <FormControl variant="outlined">
                                                         <InputLabel>Konta</InputLabel>
@@ -286,14 +299,18 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                                             value={selectedAccount}
                                                             onChange={handleChangeAccount}
                                                         >
-                                                            {transactions.accounts.map((item: Account) => 
-                                                                <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            {accountsList().map((item: Account) => {
+                                                                if (!item.archived) {
+                                                                    return <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                                } 
+                                                                return <MenuItem className="hidden" key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            }
                                                             )}
                                                         </Select>
                                                     </FormControl>
                                                 </div>
                                             }
-                                            {transactions.categories && selectedCategory > 0 &&
+                                            {categoriesList() && selectedCategory > 0 &&
                                                 <div className="line-element">
                                                     <FormControl variant="outlined">
                                                         <InputLabel>Kategorie</InputLabel>
@@ -302,9 +319,12 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                                             value={selectedCategory}
                                                             onChange={handleChangeCategory}
                                                         >
-                                                            {transactions.categories.map((item: Category) => 
-                                                                <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
-                                                            )}
+                                                            {categoriesList().map((item: Category) => {
+                                                                if (!item.archived) {
+                                                                    return <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                                } 
+                                                                return <MenuItem className="hidden" key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            })}
                                                         </Select>
                                                     </FormControl>
                                                 </div>
@@ -312,8 +332,7 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                         </div>
                                         :
                                         <div className="one-line">
-                                            {sameAccountsError}
-                                            {transactions.accounts && fromAccount > 0 &&
+                                            {accountsList() && fromAccount > 0 &&
                                                 <div className="line-element">
                                                     <FormControl variant="outlined" error={sameAccountsError}>
                                                         <InputLabel>Z konta</InputLabel>
@@ -322,14 +341,18 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                                             value={fromAccount}
                                                             onChange={handleChangeFromAccount}
                                                         >
-                                                            {transactions.accounts.map((item: Account) => 
-                                                                <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            {accountsList().map((item: Account) => {
+                                                                if (!item.archived) {
+                                                                    return <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                                } 
+                                                                return <MenuItem className="hidden" key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            }
                                                             )}
                                                         </Select>
                                                     </FormControl>
                                                 </div>
                                             }
-                                            {transactions.accounts && toAccount > 0 &&
+                                            {accountsList() && toAccount > 0 &&
                                                 <div className="line-element">
                                                     <FormControl variant="outlined" error={sameAccountsError}>
                                                         <InputLabel>Na konto</InputLabel>
@@ -338,8 +361,12 @@ const TransactionDialog: FC<any> = ({ forwardRef, updateList }) => {
                                                             value={toAccount}
                                                             onChange={handleChangeToAccount}
                                                         >
-                                                            {transactions.accounts.map((item: Account) => 
-                                                                <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            {accountsList().map((item: Account) => {
+                                                                if (!item.archived) {
+                                                                    return <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                                } 
+                                                                return <MenuItem className="hidden" key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                            }
                                                             )}
                                                         </Select>
                                                     </FormControl>

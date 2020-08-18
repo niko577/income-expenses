@@ -61,6 +61,7 @@
             text-align: center;
             font-weight: 500;
             letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.15);
             @media (min-width: 500px) {
               font-size: 24px;
             }
@@ -82,6 +83,8 @@
           .amount {
             text-align: center;
             font-size: 18px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.15);
+            font-weight: 500;
           }
         }
       }
@@ -124,7 +127,10 @@
         margin-right: 15px;
       }
     }
-  }
+    }
+    .transaction-in-category {
+        margin-top: 50px;
+    }
 }
 
 .module-category-modal .MuiDialog-paper {

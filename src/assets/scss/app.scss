@@ -142,8 +142,9 @@ label.MuiFormLabel-root.MuiInputLabel-root {
         display: none;
     }
 }
-
-
+.alert-msg {
+    box-shadow: none !important;
+}
 .static-for-animation {
     position: absolute;
     top: 0;
@@ -151,4 +152,7 @@ label.MuiFormLabel-root.MuiInputLabel-root {
     right: 0;
     width: 100%;
     height: 100%;
+}
+.hidden {
+    display: none !important;
 }

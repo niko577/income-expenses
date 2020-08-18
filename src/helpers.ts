@@ -47,33 +47,39 @@ export const accountIconList: string[] = [
     'shopping_basket',
 ]
 
-export const convertMonths = (month: number) => {
+export const convertMonths = (month: number, type: number) => {
     switch (month) {
     case 1:
-        return 'Stycznia'
+        return type === 0 ? 'Stycznia' : 'Styczeń'
     case 2:
-        return 'Lutego'
+        return type === 0 ? 'Lutego' : 'Luty'
     case 3:
-        return 'Marca'
+        return type === 0 ? 'Marca' : 'Marzec'
     case 4:
-        return 'Kwietnia'
+        return type === 0 ? 'Kwietnia' : 'Kwiecień'
     case 5:
-        return 'Maja'
+        return type === 0 ? 'Maja' : 'Maj'
     case 6:
-        return 'Czerwca'
+        return type === 0 ? 'Czerwca' : 'Czerwiec'
     case 7:
-        return 'Lipca'
+        return type === 0 ? 'Lipca' : 'Lipiec'
     case 8:
-        return 'Sierpnia'
+        return type === 0 ? 'Sierpnia' : 'Sierpień'
     case 9:
-        return 'Września'
+        return type === 0 ? 'Września' : 'Wrzesień'
     case 10:
-        return 'Października'
+        return type === 0 ? 'Października' : 'Październik'
     case 11:
-        return 'Listopada'
+        return type === 0 ? 'Listopada' : 'Listopad'
     case 12:
-        return 'Grudnia'
+        return type === 0 ? 'Grudnia' : 'Grudzień'
     default:
         return ''
     }
+}
+
+export const prettyPrice = (price: number) => {
+    const stringify = price.toString()
+    const replaced = stringify.replace('.', ',')
+    return replaced
 }

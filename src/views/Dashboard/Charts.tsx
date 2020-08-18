@@ -8,7 +8,7 @@ const DashboardCharts: React.FC<any> = ({ id }) => {
 
         if (id === 'chart-expense') {
             diagramData = {
-                labels: ['1 cze', '2 cze', '3 cze', '4 cze', '5 cze', '6 cze', '7 cze', '8 cze', '9 cze', '10 cze', '11 cze', '12 cze', '13 cze', '14 cze', '15 cze', '16 cze', '17 cze', '18 cze', '19 cze', '20 cze', '21 cze', '22 cze', '23 cze', '24 cze', '25 cze', '26 cze', '27 cze', '28 cze', '29 cze', '30 cze'],
+                labels: ['1 cze', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
                 datasets: [{
                     label: 'Artykuły spożywcze',
                     backgroundColor: '#03a9f4',
@@ -54,6 +54,7 @@ const DashboardCharts: React.FC<any> = ({ id }) => {
             }
         }
 
+        // eslint-disable-next-line
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: diagramData,
@@ -106,6 +107,7 @@ const DashboardCharts: React.FC<any> = ({ id }) => {
 
     useEffect(() => {
         initCharts()
+        // eslint-disable-next-line
     }, [])
 
     return (

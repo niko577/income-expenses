@@ -91,6 +91,7 @@ const AccountsDialog: FC<any> = ({ updateList, forwardRef }) => {
         setName('')
         setDesc('')
         setAmount('')
+        setDeafaultAcc(false)
         setAccountIcon('credit_card')
         setDialogStatus(true)
     }
@@ -101,6 +102,7 @@ const AccountsDialog: FC<any> = ({ updateList, forwardRef }) => {
         setActionType('edit')
         setId(account.id)
         setName(account.name)
+        setDeafaultAcc(account.default)
         setDesc(account.description === null ? '' : account.description)
         setAmount((account.currentBalance).toString() || '')
         setAccountIcon(account.iconName)
