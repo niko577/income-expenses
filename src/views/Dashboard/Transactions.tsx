@@ -9,7 +9,7 @@ const DashboardTransactions: FC<any> = ({ data }) => {
 
     useEffect(() => {
         if (data) {
-            setSliced(data.lastTransactions.slice(0, 6))
+            setSliced(data.lastTransactions.slice(0, 4))
             setGetting(false)
         }
     }, [data])

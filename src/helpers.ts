@@ -79,7 +79,8 @@ export const convertMonths = (month: number, type: number) => {
 }
 
 export const prettyPrice = (price: number) => {
-    const stringify = price.toString()
+    const fixed = price.toFixed(2)
+    const stringify = fixed.toString()
     const replaced = stringify.replace('.', ',')
     return replaced
 }

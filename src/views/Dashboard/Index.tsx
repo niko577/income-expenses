@@ -7,13 +7,15 @@ import { GlobalContext } from '../../context/GlobalContext'
 
 const Dashboard: FC<any> = () => {
     const { DISPATCH } = useContext(GlobalContext)
-    const [data, setData] = useState(null)
+    const [data, setData] = useState<any>(null)
+    const [getting, setGetting] = useState(true)
 
     const getData = async () => {
         const response = await DISPATCH('get', '/dashboard')
         
         if (response !== null) { 
             setData(response) 
+            setGetting(false)
         }
     }
 
@@ -24,30 +26,34 @@ const Dashboard: FC<any> = () => {
     }, [])
 
     return (
-        <div className="module-dashboard">
-            <div className="items-wrapper">
-                <div className="dash-element">
-                    <Paper>
-                        <Charts id="chart-expense" />
-                    </Paper>
+        <>
+            {!getting &&
+                <div className="module-dashboard">
+                    <div className="items-wrapper">
+                        <div className="dash-element">
+                            <Paper>
+                                {data?.expensesDiagramData && <Charts id="chart-expense" data={data.expensesDiagramData} />}
+                            </Paper>
+                        </div>
+                        <div className="dash-element">
+                            <Paper>
+                                {data?.proceedsDiagramData && <Charts id="chart-proceed" data={data.proceedsDiagramData} />}
+                            </Paper>
+                        </div>
+                        <div className="dash-element">
+                            <Paper>
+                                <Categories data={data} />
+                            </Paper>
+                        </div>
+                        <div className="dash-element">
+                            <Paper>
+                                <Transactions data={data} />
+                            </Paper>
+                        </div>
+                    </div>
                 </div>
-                <div className="dash-element">
-                    <Paper>
-                        <Charts id="chart-proceed" />
-                    </Paper>
-                </div>
-                <div className="dash-element">
-                    <Paper>
-                        <Categories data={data} />
-                    </Paper>
-                </div>
-                <div className="dash-element">
-                    <Paper>
-                        <Transactions data={data} />
-                    </Paper>
-                </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
 

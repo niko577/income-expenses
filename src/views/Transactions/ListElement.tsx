@@ -7,7 +7,6 @@ const TransactionsListElement: FC<any> = ({ transaction }) => {
     const [animate, setAnimate] = useState(false)
 
     useEffect(() => {
-        console.log(transaction);
         setTimeout(() => {
             setAnimate(true)
         }, 1)

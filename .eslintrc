@@ -1,75 +1,78 @@
 {
-    "plugins": ["prettier", "@typescript-eslint"],
-    "extends": ["airbnb-typescript", "react-app", "prettier"],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "project": "./tsconfig.json"
-    },
-    "settings": {
-        "import/resolver": {
-            "typescript": {
-                "alwaysTryTypes": true
-            }
-        }
-    },
-    "rules": {
-        "object-curly-spacing": ["warn", "always"],
-        "no-unused-vars": [
-            "warn",
-            {
-            "vars": "all",
-            "args": "none"
-            }
-        ],
-        "@typescript-eslint/no-unused-vars": [
-            "warn",
-            {
-            "vars": "all",
-            "args": "none"
-            }
-        ],
-        "@typescript-eslint/no-explicit-any": [
-            "error",
-            {
-            "ignoreRestArgs": true
-            }
-        ],
-        "max-len": [
-            "warn",
-            {
-            "code": 80,
-            "ignoreStrings": true,
-            "ignoreTemplateLiterals": true,
-            "ignoreComments": true
-            }
-        ],
-        "no-plusplus": [
-            "error",
-            {
-            "allowForLoopAfterthoughts": true
-            }
-        ],
-        "react/jsx-key": "error",
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-            "devDependencies": [
-                "**/*.test.js",
-                "**/*.test.jsx",
-                "**/*.test.ts",
-                "**/*.test.tsx",
-                "src/tests/**/*"
-            ]
-            }
-        ],
-        "react/jsx-props-no-spreading": "off",
-        "import/prefer-default-export": "off",
-        "react/jsx-boolean-value": "off",
-        "react/prop-types": "off",
-        "react/no-unescaped-entities": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "react/jsx-wrap-multilines": "off",
-        "react/destructuring-assignment": "off"
+  "plugins": ["prettier", "@typescript-eslint"],
+  "extends": ["airbnb-typescript", "react-app", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
+  },
+  "rules": {
+    "object-curly-spacing": ["warn", "always"],
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "react/jsx-key": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.js",
+          "**/*.test.jsx",
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "src/tests/**/*"
+        ]
+      }
+    ],
+    "max-len": "off",
+    "indent": ["error", 4],
+    "react/jsx-indent": "off",
+    "consistent-return": "off",
+    "no-case-declarations": "off",
+    "no-nested-ternary": "off",
+    "react/jsx-indent-props": "off",
+    "@typescript-eslint/indent": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-boolean-value": "off",
+    "no-console": "off",
+    "import/no-mutable-exports": "off",
+    "prefer-destructuring": "off",
+    "array-callback-return": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-array-index-key": "off",
+    "@typescript-eslint/semi": "off",
+    "react/jsx-curly-newline": "off",
+    "jsx-a11y/accessible-emoji": "off",
+    "react/jsx-first-prop-new-line": "off",
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/destructuring-assignment": "off"
+  }
 }
-  
