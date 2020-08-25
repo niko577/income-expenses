@@ -3,7 +3,7 @@ import { TextField, Button, Avatar, Typography, CssBaseline, Icon } from '@mater
 import { Alert } from '@material-ui/lab'
 import { GlobalContext } from '../../context/GlobalContext'
 
-const LoginWidget: React.FC = () => {
+const LoginWidget: React.FC<any> = ({alertMsg}: {alertMsg: any}) => {
     const { axios, env, setLoader, setNewToken, setAuthorization } = useContext(GlobalContext)
 
     const [email, setEmail] = useState('')
@@ -26,6 +26,7 @@ const LoginWidget: React.FC = () => {
             })
             .catch((error: any) => {
                 setErrorMessage(error?.response?.data?.message)
+                alertMsg(error?.response?.data?.message)
             })
             .then(() => {
                 setLoader(false)
@@ -35,7 +36,6 @@ const LoginWidget: React.FC = () => {
     return (
         <>
             <div>
-                <CssBaseline />
                 <div>
                     <div className="heading">
                         <Avatar>

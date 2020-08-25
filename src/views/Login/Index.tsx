@@ -4,16 +4,66 @@ import RegisterWidget from './Register'
 
 const LoginIndex: React.FC = () => {
     const [widgetType, setWidgetType] = useState('LoginWidget')
+    const [isAlert, setIsAlert] = useState(false)
+    const [alertLogin, setAlertLogin] = useState('')
+    const [alertRegister, setAlertRegister] = useState('')
+    const [fixCss, setFixCss] = useState(false)
 
     useEffect(() => {
         document.title = 'Money Manager - Logowanie'
+        setTimeout(() => {
+            setFixCss(true)
+        }, 100)
     }, [])
+
+    useEffect(() => {
+        msgCallback()
+    }, [alertLogin, alertRegister])
+
+    const msgCallback = () => {
+        if(alertLogin.length || alertRegister.length) {
+            setIsAlert(true)
+        } else {
+            setIsAlert(false)
+        }
+    }
 
     return (
         <div className="view-login-container">
-            <div className="inner-box">
+            <div className="bg-outside">
+                <div className="bg-awesome">
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                    <div className="bg-element">
+                        <div className="bg-inner"></div>
+                    </div>
+                </div>
+            </div>
+            <div className={"inner-box" + (isAlert ? " is-alert" : '') + (fixCss ? ' fix' : '')}>
                 <div className={widgetType !== 'LoginWidget' ? 'hidden' : ''}>
-                    <LoginWidget />
+                    <LoginWidget alertMsg={data => setAlertLogin(data)} />
                     <div className="acc-ask">
                         <button
                             type="button"
@@ -24,7 +74,7 @@ const LoginIndex: React.FC = () => {
                     </div>
                 </div>
                 <div className={widgetType !== 'RegisterWidget' ? 'hidden' : ''}>
-                    <RegisterWidget />
+                    <RegisterWidget alertMsg={data => setAlertRegister(data)} />
                     <div className="acc-ask">
                         <button
                             type="button"

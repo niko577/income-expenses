@@ -3,7 +3,7 @@ import { Icon, TextField, Button, Avatar, Typography, Checkbox, FormControlLabel
 import { Alert } from '@material-ui/lab'
 import { GlobalContext } from '../../context/GlobalContext'
 
-const RegisterWidget: React.FC = () => {
+const RegisterWidget: React.FC<any> = ({alertMsg}: {alertMsg: any}) => {
     const { axios, env, setLoader, setNewToken, setAuthorization } = useContext(GlobalContext)
 
     const [email, setEmail] = useState('')
@@ -26,6 +26,7 @@ const RegisterWidget: React.FC = () => {
             })
             .catch((error: any) => {
                 setErrorMessage(error?.response?.data?.message)
+                alertMsg(error?.response?.data?.message)
             })
             .then(() => {
                 setLoader(false)
@@ -35,7 +36,6 @@ const RegisterWidget: React.FC = () => {
     return (
         <>
             <div>
-                <CssBaseline />
                 <div>
                     <div className="heading">
                         <Avatar>
