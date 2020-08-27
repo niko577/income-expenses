@@ -47,7 +47,7 @@ const App: React.FC = () => {
             <GetCSV />
             {!checking && (
                 <div>
-                    <Router basename={process.env.PUBLIC_URL}>
+                    <Router>
                         <Switch>
                             {!authorization && (
                                 <Route exact path="/login">
