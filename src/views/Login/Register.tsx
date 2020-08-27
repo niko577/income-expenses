@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { Icon, TextField, Button, Avatar, Typography, Checkbox, FormControlLabel, CssBaseline } from '@material-ui/core'
+import { Icon, TextField, Button, Avatar, Typography, Checkbox, FormControlLabel } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { GlobalContext } from '../../context/GlobalContext'
 
-const RegisterWidget: React.FC<any> = ({alertMsg}: {alertMsg: any}) => {
+const RegisterWidget: React.FC<any> = () => {
     const { axios, env, setLoader, setNewToken, setAuthorization } = useContext(GlobalContext)
 
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState([])
 
@@ -17,6 +18,7 @@ const RegisterWidget: React.FC<any> = ({alertMsg}: {alertMsg: any}) => {
         axios
             .post(`${env}/auth/sign-up`, {
                 email,
+                username,
                 password,
             })
             .then((response: any) => {
@@ -26,7 +28,6 @@ const RegisterWidget: React.FC<any> = ({alertMsg}: {alertMsg: any}) => {
             })
             .catch((error: any) => {
                 setErrorMessage(error?.response?.data?.message)
-                alertMsg(error?.response?.data?.message)
             })
             .then(() => {
                 setLoader(false)
@@ -44,6 +45,18 @@ const RegisterWidget: React.FC<any> = ({alertMsg}: {alertMsg: any}) => {
                         <Typography component="h1" variant="h5">Załóż konto</Typography>
                     </div>
                     <form onSubmit={handleSignUp}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            label="Nazwa użytkownika"
+                            name="name"
+                            autoComplete="name"
+                            autoFocus
+                            value={username}
+                            onChange={event => setUsername(event.target.value)}
+                        />
                         <TextField
                             variant="outlined"
                             margin="normal"

@@ -3,7 +3,8 @@
   justify-content: center;
     background-color: #fff;
   @media (min-width: 900px) {
-    margin-top: 200px;
+    align-items: center;
+    height: 80vh;
   }
   .bg-outside {
     min-height: 692px;
@@ -95,35 +96,8 @@
     @media (min-width: 900px) {
       background-color: #fff;
       box-shadow: 0 2px 18px 1px rgba(49, 53, 72, 0.12);
-      height: 460px;
       width: 100%;
-      position: relative;
       overflow: hidden;
-      &.is-alert {
-          height: 560px;
-      }
-      &.fix {
-        .hidden {
-            display: block !important;
-        }
-      }
-      > div {
-          position: absolute;
-          top: 40px;
-          left: 40px;
-          transition: transform .3s, opacity .1s;
-          width: calc(100% - 80px);
-          opacity: 1;
-      }
-      .hidden:first-child {
-            transform: translateX(-120%);
-            opacity: 0;
-      }
-      .hidden:last-child {
-            transform: translateX(120%);
-            opacity: 0;
-      }
-
     }
     .acc-ask {
       text-align: right;

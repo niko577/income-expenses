@@ -7,7 +7,7 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
     const { DISPATCH, setAuthorization, setCsvModal } = useContext(GlobalContext)
 
     const [mobileOpen, setMobileOpen] = useState(false)
-    const [userData, setUserData] = useState({ email: '' })
+    const [userData, setUserData] = useState({ email: '', username: '' })
 
     const pageList = [
         ['Strona główna', '/dashboard', 'home'],
@@ -51,7 +51,7 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
                     <Avatar>
                         <Icon>person</Icon>
                     </Avatar>
-                    <div className="user-name">{userData.email}</div>
+                    <div className="user-name">{userData.username}</div>
                 </div>
                 <div className="close-drawer">
                     <IconButton
