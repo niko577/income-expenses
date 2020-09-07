@@ -1,5 +1,5 @@
 import React, { useContext, useState, FormEvent } from 'react'
-import { TextField, Button, Avatar, Typography, CssBaseline, Icon } from '@material-ui/core'
+import { TextField, Button, Avatar, Typography, Icon } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { GlobalContext } from '../../context/GlobalContext'
 

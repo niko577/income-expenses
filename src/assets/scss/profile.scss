@@ -1,0 +1,50 @@
+.module-profile {
+    max-width: 900px;
+    margin: 0 auto;
+    @media (min-width: 600px) {
+        margin: 10px auto;
+    }
+    @media (min-width: 960px) {
+        margin: 5px auto;
+    }
+    .inner-card {
+        padding: 15px;
+        .MuiFormControl-root {
+            width: 100%;
+        }
+        .btns-line {
+            padding: 20px 0 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .pass-change {
+            margin: 25px 0 19px;
+        }
+        h6 {
+            padding-top: 10px;
+        }
+        .grid-fix {
+            @media (max-width: 959px) {
+                padding: 0 12px;
+            }
+        }
+        .pass-list {
+            @media (max-width: 959px) {
+                padding-top: 10px;
+            }
+        }
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+        .title {
+          font-size: 18px;
+          font-weight: 500;
+        }
+        .amount {
+          font-size: 22px;
+          font-weight: 700;
+        }
+    }
+}

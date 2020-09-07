@@ -10,6 +10,7 @@ import CategoriesDetails from './views/Categories/Details'
 import Transactions from './views/Transactions/Index'
 import Dashboard from './views/Dashboard/Index'
 import Login from './views/Login/Index'
+import Profile from './views/Profile/Index'
 
 import { GlobalContext } from './context/GlobalContext'
 
@@ -77,6 +78,11 @@ const App: React.FC = () => {
                             <ProtectedRoute exact path="/transactions">
                                 <Container name="Transakcje">
                                     <Transactions />
+                                </Container>
+                            </ProtectedRoute>
+                            <ProtectedRoute exact path="/profile">
+                                <Container name="Profil">
+                                    <Profile />
                                 </Container>
                             </ProtectedRoute>
 

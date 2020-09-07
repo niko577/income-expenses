@@ -2,8 +2,18 @@ import React, { useImperativeHandle, useContext, useEffect, useState, FC } from 
 import { Icon, CssBaseline, Divider, Drawer, Hidden, IconButton, List, Button, ListItem, Avatar, ListItemIcon, ListItemText } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import { GlobalContext } from '../context/GlobalContext'
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
+
 
 const MiniDrawer: FC<any> = ({ forwardRef }) => {
+    const useStyles = makeStyles((theme: Theme) =>
+      createStyles({
+        icon: {
+          backgroundColor: '#e91e63 !important'
+        }
+      }),
+    );
     const { DISPATCH, setAuthorization, setCsvModal } = useContext(GlobalContext)
 
     const [mobileOpen, setMobileOpen] = useState(false)
@@ -15,6 +25,8 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
         ['Kategorie', '/categories', 'category'],
         ['Transakcje', '/transactions', 'receipt'],
     ]
+
+    const classes = useStyles()
 
     useEffect(() => {
         getUserData()
@@ -48,7 +60,7 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
         <div className="drawer">
             <div className="toolbar-dtx">
                 <div className="current-user">
-                    <Avatar>
+                    <Avatar className={classes.icon}>
                         <Icon>person</Icon>
                     </Avatar>
                     <div className="user-name">{userData.username}</div>

@@ -8,6 +8,7 @@ $primary-color: #1976d2;
 @import './accounts.scss';
 @import './categories.scss';
 @import './transactions.scss';
+@import './profile.scss';
 
 body {
   color: #464855;
@@ -113,7 +114,13 @@ label.MuiFormLabel-root.MuiInputLabel-root {
     }
 }
 
-
+.profile-button {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.54);
+    &.active {
+        color: #f50057;
+    }
+}
 
 .fade-appear, .fade-enter {
     transform: scale(1.05);
