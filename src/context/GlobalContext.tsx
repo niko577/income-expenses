@@ -12,6 +12,7 @@ const GlobalCtx: FC = ({ children }) => {
     const [token, setToken] = useState('')
     const [authorization, setAuthorization] = useState(false)
     const [csvModal, setCsvModal] = useState(false)
+    const [userData, setUserData] = useState()
 
     useEffect(() => {
         checkToken()
@@ -131,6 +132,8 @@ const GlobalCtx: FC = ({ children }) => {
         setAuthorization,
         csvModal,
         setCsvModal,
+        userData, 
+        setUserData
     }
 
     return (

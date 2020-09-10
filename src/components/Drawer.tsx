@@ -10,14 +10,13 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
     const useStyles = makeStyles((theme: Theme) =>
       createStyles({
         icon: {
-          backgroundColor: '#e91e63 !important'
+          backgroundColor: `${userData && userData.color ? userData.color : ''} !important`
         }
       }),
     );
-    const { DISPATCH, setAuthorization, setCsvModal } = useContext(GlobalContext)
+    const { DISPATCH, setAuthorization, setCsvModal, userData, setUserData } = useContext(GlobalContext)
 
     const [mobileOpen, setMobileOpen] = useState(false)
-    const [userData, setUserData] = useState({ email: '', username: '' })
 
     const pageList = [
         ['Strona główna', '/dashboard', 'home'],
@@ -63,7 +62,7 @@ const MiniDrawer: FC<any> = ({ forwardRef }) => {
                     <Avatar className={classes.icon}>
                         <Icon>person</Icon>
                     </Avatar>
-                    <div className="user-name">{userData.username}</div>
+                    <div className="user-name">{userData && userData.username}</div>
                 </div>
                 <div className="close-drawer">
                     <IconButton
