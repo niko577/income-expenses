@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useContext, useState } from 'react'
-import { DialogTitle, DialogContent, Button, DialogContentText, DialogActions, Dialog, TextField, Paper, Container, Grid, Icon, Typography } from '@material-ui/core'
+import { DialogTitle, DialogContent, Button, DialogContentText, DialogActions, Dialog, TextField, Paper, Grid, Icon, Typography } from '@material-ui/core'
 import { GlobalContext } from '../../context/GlobalContext'
 import Alert from '@material-ui/lab/Alert'
 
@@ -101,6 +101,7 @@ const Profile: FC<any> = () => {
     useEffect(() => {
         getUserData()
         document.title = 'Money Manager - Profil'
+        // eslint-disable-next-line
     }, [])
 
     return (

@@ -12,7 +12,6 @@ const Dashboard: FC<any> = () => {
 
     const getData = async () => {
         const response = await DISPATCH('get', '/dashboard')
-        
         if (response !== null) { 
             setData(response) 
             setGetting(false)
