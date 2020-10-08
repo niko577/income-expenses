@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useContext, useState, useImperativeHandle } from 'react'
+import React, { FC, useEffect, useContext, useState, useImperativeHandle, useRef } from 'react'
 import { Paper, CardActionArea, Icon, Button } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
@@ -6,6 +6,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import plLocale from 'date-fns/locale/pl';
 import { GlobalContext } from '../../context/GlobalContext'
 import TransactionsListElement from './ListElement'
+import Dialog from './Monthly'
 
 const TransactionsList: FC<any> = ({ forwardRef, editTransaction }) => {
     const { DISPATCH, convertMonths, prettyPrice } = useContext(GlobalContext)
@@ -60,6 +61,12 @@ const TransactionsList: FC<any> = ({ forwardRef, editTransaction }) => {
         // eslint-disable-next-line
     }, [])
 
+    const setOpen = () => {
+        childRef.current.show()
+    }
+
+    const childRef: any = useRef(null)
+
     const startBalance = () => transactions.startBalance
     const endBalance = () => transactions.endBalance
 
@@ -67,22 +74,29 @@ const TransactionsList: FC<any> = ({ forwardRef, editTransaction }) => {
         <>
             {!getting &&
                 <div className="transaction-list">
+                    <div className="monthly">
+                        <Button onClick={() => setOpen()}  variant="outlined">Zobacz</Button>
+                        <span>Podsumowanie miesięczne dla wybranej kategorii</span>
+                    </div>
+                    <Dialog forwardRef={childRef} />
                     <div className="filters">
                         <div className="hidden-datepicker">
-                            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={plLocale}>
-                                <KeyboardDatePicker
-                                    format="yyyy-MM"
-                                    okLabel="Ok"
-                                    clearLabel="Wyczyść"
-                                    cancelLabel="Anuluj"
-                                    onClose={() => setDatepickerVisibility(false)}
-                                    value={selectedDate}
-                                    open={datepickerVisibility}
-                                    animateYearScrolling={true}
-                                    onChange={handleDateChange}
-                                    views={['month']}
-                                />
-                            </MuiPickersUtilsProvider>
+                            {selectedDate &&
+                                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={plLocale}>
+                                    <KeyboardDatePicker
+                                        format="yyyy-MM"
+                                        okLabel="Ok"
+                                        clearLabel="Wyczyść"
+                                        cancelLabel="Anuluj"
+                                        onClose={() => setDatepickerVisibility(false)}
+                                        value={selectedDate}
+                                        open={datepickerVisibility}
+                                        animateYearScrolling={true}
+                                        onChange={handleDateChange}
+                                        views={['month']}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            }
                         </div>
                         <div className="date-filter">
                             <div className="balance-from">

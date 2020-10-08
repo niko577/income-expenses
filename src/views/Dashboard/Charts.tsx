@@ -8,6 +8,7 @@ const DashboardCharts: React.FC<any> = ({ id, data }) => {
             labels: data.labels,
             datasets: data.datasets
         }
+        console.log(diagramData);
 
         // eslint-disable-next-line
         const myChart = new Chart(ctx, {

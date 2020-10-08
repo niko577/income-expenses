@@ -50,8 +50,26 @@
 
     }
 }
-
+.module-transaction-monthly {
+    .MuiDialog-paperWidthSm {
+        max-width: 800px;
+        width: 100%;
+    }
+    .MuiFormControl-root {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 30px;
+    }
+}
 .transaction-list {
+    .monthly {
+        padding-bottom: 30px;
+        display: flex;
+        align-items: center;
+        button {
+            margin-right: 20px;
+        }
+    }
     .list {
       > div {
         margin-bottom: 10px;
